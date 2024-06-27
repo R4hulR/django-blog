@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: auto;
+            padding-bottom: 60px; /* To avoid overlap with the footer */
+        }
+        .post {
+            background: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post h2 {
+            margin-top: 0;
+        }
+        .post .datetime {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .post p {
+            line-height: 1.6;
+        }
+        .post a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .post a:hover {
+            text-decoration: none;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+    <div class="container">
+        {% for post in posts %}
+        <div class="post">
+            <a href="{% url 'post' post.id%}">
+                <h2>{{ post.title }}</h2>
+                <p class="datetime">{{ post.date|date:"F j, Y" }} at {{ post.date|date:"g:i A" }}</p>
+                <p>{{ post.content|truncatewords:20 }}</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+</html>
